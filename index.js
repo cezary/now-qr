@@ -10,6 +10,7 @@ const defaultQueryValues = {
   bgColor: '#fff',
   fgColor: '#000',
   level: 'L',
+  margin: 0,
   width: 500
 }
 
@@ -36,12 +37,10 @@ module.exports = async (req, res) => {
 
   res.setHeader('Content-Type', 'image/svg+xml');
 
-  const padding = cells.length / parseInt(width, 10) * parseInt(margin, 10);
   const marginInCells = cells.length / parseInt(width, 10) * parseInt(margin, 10);
-  console.log('cells.length', cells.length);
-  console.log('marginInCells', marginInCells);
+  const viewBox = `${0 - marginInCells} ${0 - marginInCells} ${cells.length + marginInCells * 2} ${cells.length + marginInCells * 2}`;
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" viewBox="0 0 ${cells.length + marginInCells * 2} ${cells.length + marginInCells * 2}" height="${width}px" width="${width}px" style="border: ${margin} solid ${bgColor}">${
+  return `<svg xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" viewBox="${viewBox}" height="${width}px" width="${width}px" style="border: ${margin} solid ${bgColor}">${
       cells.map((row, rowIndex) =>
         row.map((cell, colIndex) =>
           `<rect height="1" width="1" style="fill: ${cell ? fgColor : bgColor}" x="${colIndex}" y="${rowIndex}"></rect>`

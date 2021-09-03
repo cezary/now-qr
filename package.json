@@ -12,10 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "micro": "^8.0.1",
+    "micro": "^9.3.4",
     "qr.js": "^0.0.0"
   },
   "devDependencies": {
-    "micro-dev": "^1.0.2"
+    "micro-dev": "^3.0.0"
   }
 }
